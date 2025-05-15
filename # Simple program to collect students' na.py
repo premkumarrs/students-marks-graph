@@ -3,7 +3,6 @@ from tkinter import Canvas
 import random
 
 def get_color():
-    # Generate a random color in hex format
     return f'#{random.randint(0, 0xFFFFFF):06x}'
 
 students = []
@@ -42,11 +41,9 @@ while True:
         totals.append(total)
         max_totals.append(max_total)
         continue
-    # If break was called in for loop, skip appending
     print(f"Skipping {name} due to invalid input.")
 
 if students:
-    # Create a tkinter window
     root = tk.Tk()
     root.title("Students' Percentages")
     width = 80 * len(students) + 100
@@ -57,7 +54,6 @@ if students:
     max_percent = 100
     bar_width = 40
     gap = 40
-    # Minimalist pastel color palette
     pastel_colors = ['#A3CEF1', '#FFB5A7', '#B5EAD7', '#FFDAC1', '#C7CEEA', '#E2F0CB', '#B5D0E6', '#F3B0C3', '#F6DFEB', '#F9F9C5']
     for i, (name, percent, total, max_total) in enumerate(zip(students, percentages, totals, max_totals)):
         color = pastel_colors[i % len(pastel_colors)]
@@ -68,7 +64,6 @@ if students:
         canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline='')
         canvas.create_text((x0 + x1) / 2, y0 + 15, text=name, anchor='n', angle=45, fill='#222', font=('Arial', 10, 'bold'))
         canvas.create_text((x0 + x1) / 2, y1 - 10, text=f"{percent:.2f}%", anchor='s', fill='#222', font=('Arial', 10, 'bold'))
-        # Show decimals only if user entered them
         def smart_fmt(val):
             return f"{val:.2f}" if not val.is_integer() else f"{int(val)}"
         canvas.create_text((x0 + x1) / 2, y0 + 35, text=f"{smart_fmt(total)}/{smart_fmt(max_total)}", anchor='n', font=('Arial', 9), fill='#555')
